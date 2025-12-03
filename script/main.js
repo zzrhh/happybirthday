@@ -18,6 +18,23 @@ window.addEventListener('load', () => {
     });
 });
 
+function animatePhotoWall() {
+  const photos = document.querySelectorAll(".wall-photo");
+
+  gsap.to(photos, {
+    opacity: 1,
+    scale: 1,
+    rotation: () => gsap.utils.random(-8, 8), // 每张照片随机旋转 ±8°
+    x: () => gsap.utils.random(-10, 10),      // 随机左右偏移
+    y: () => gsap.utils.random(-10, 10),      // 随机上下偏移
+    duration: 0.8,
+    stagger: 0.15,
+    ease: "back.out(1.7)"
+  });
+}
+
+// 你原本 step6 的动画执行完后再调用
+// 例如用 timeline.add 或直接调用
 
 // animation timeline
 const animationTimeline = () => {
@@ -189,6 +206,17 @@ const animationTimeline = () => {
     )
     .from(
         ".profile-picture",
+        0.5, {
+            scale: 3.5,
+            opacity: 0,
+            x: 25,
+            y: -25,
+            rotationZ: -45,
+        },
+        "-=2"
+    )
+    .from(
+        ".photo-wall",
         0.5, {
             scale: 3.5,
             opacity: 0,
